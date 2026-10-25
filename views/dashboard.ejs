@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf2f5">
+  <title>Weatherly — Weather Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="rail">
+      <a class="brand" href="/"> <span class="brand-mark">w</span><span>Weatherly</span></a>
+      <nav class="rail-nav" aria-label="Main navigation">
+        <a class="rail-link active" href="#overview" aria-label="Overview">▦</a>
+        <a class="rail-link" href="#forecast" aria-label="Forecast">☁</a>
+        <a class="rail-link" href="#air" aria-label="Air quality">♧</a>
+        <a class="rail-link" href="#sun" aria-label="Sunrise and sunset">◉</a>
+        <a class="rail-link" href="#details" aria-label="Weather details">⚙</a>
+      </nav>
+      <div class="rail-bottom"><span class="help-mark">?</span><span>↪</span></div>
+    </aside>
+
+    <section class="dashboard" id="overview">
+      <header class="topbar">
+        <div class="greeting">
+          <div class="avatar">☀</div>
+          <div><span class="muted small">Hello,</span><h1>Weather explorer</h1></div>
+        </div>
+
+        <form id="search-form" class="search-box">
+          <span class="search-symbol">⌕</span>
+          <input id="city-input" name="city" type="search" placeholder="Search any city..." aria-label="Search city">
+          <button type="submit" aria-label="Search weather">⌕</button>
+        </form>
+
+        <div class="today-label">
+          <strong id="today-weekday">Today</strong>
+          <span id="today-date">Live weather</span>
+        </div>
+      </header>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <section class="hero weather-sky" id="hero">
+        <div class="hero-cloud cloud-one"></div>
+        <div class="hero-cloud cloud-two"></div>
+        <div class="hero-sun"></div>
+
+        <div class="hero-copy">
+          <span class="eyebrow" id="hero-country">CURRENT WEATHER</span>
+          <div class="hero-temp">
+            <span id="current-temp">--</span><span class="degree">°</span>
+            <img id="current-icon" alt="" src="https://openweathermap.org/img/wn/01d@2x.png">
+          </div>
+          <h2 id="current-city">Search for a city</h2>
+          <p id="current-condition">Loading weather...</p>
+          <div class="hero-extra">
+            <span>Feels like <b id="feels-like">--°</b></span>
+            <span>•</span><span id="updated-time">Live update</span>
+          </div>
+        </div>
+
+        <div class="hero-timeline">
+          <div><span>Yesterday</span><span class="timeline-icon">☁</span></div>
+          <div class="timeline-active"><span>Today</span><span class="timeline-icon">☀</span></div>
+          <div><span>Tomorrow</span><span class="timeline-icon">☁</span></div>
+        </div>
+      </section>
+
+      <section class="forecast-section" id="forecast">
+        <div class="section-heading">
+          <div><h2>Next 5 days</h2><p>Plan your week around the weather</p></div>
+          <span class="section-icon">↗</span>
+        </div>
+        <div class="forecast-grid" id="forecast-grid">
+          <div class="forecast-placeholder">Your forecast will appear here.</div>
+        </div>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel air-panel" id="air">
+          <div class="panel-heading">
+            <div><h2>Air Quality Index</h2><p id="air-location">Local air conditions</p></div>
+            <span class="panel-symbol green">≋</span>
+          </div>
+          <div class="air-summary">
+            <span class="wind-art">〰</span>
+            <div><strong id="aqi-label">Checking air quality</strong><p id="aqi-description">Air quality information</p></div>
+          </div>
+          <div class="aqi-scale">
+            <div><strong id="aqi-number">--</strong><small>AQI</small></div>
+            <div class="aqi-track"><span id="aqi-marker"></span></div>
+          </div>
+          <div class="pollutants">
+            <div><span>PM2.5</span><b id="pm25">--</b></div>
+            <div><span>PM10</span><b id="pm10">--</b></div>
+            <div><span>NO₂</span><b id="no2">--</b></div>
+            <div><span>O₃</span><b id="o3">--</b></div>
+          </div>
+        </article>
+
+        <article class="panel sun-panel" id="sun">
+          <div class="panel-heading">
+            <div><h2>Sunrise &amp; Sunset</h2><p>Daylight in <span id="sun-city">your city</span></p></div>
+            <span class="panel-symbol">◷</span>
+          </div>
+          <div class="sun-row">
+            <span class="sun-emoji">🌅</span>
+            <div class="sun-info"><span>Sunrise</span><strong id="sunrise-time">--:-- AM</strong></div>
+            <div class="sun-arc"><span>☀</span></div>
+            <div class="sun-info right"><span>Sunset</span><strong id="sunset-time">--:-- PM</strong></div>
+            <span class="sun-emoji">🌙</span>
+          </div>
+          <div class="sun-foot">
+            <span>☀ <b id="daylight-length">Daylight details</b></span>
+            <span id="timezone-label">Local time</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="details-grid" id="details">
+        <article class="detail-card"><span class="detail-icon humidity">♧</span><span>Humidity</span><strong id="humidity">--%</strong><small>Relative humidity</small></article>
+        <article class="detail-card"><span class="detail-icon wind">〰</span><span>Wind speed</span><strong id="wind-speed">-- m/s</strong><small>Current wind</small></article>
+        <article class="detail-card"><span class="detail-icon pressure">◉</span><span>Pressure</span><strong id="pressure">-- hPa</strong><small>Atmospheric pressure</small></article>
+        <article class="detail-card"><span class="detail-icon visibility">◌</span><span>Visibility</span><strong id="visibility">-- km</strong><small>Viewing distance</small></article>
+      </section>
+
+      <footer class="footer-note">Weatherly <span>•</span> Weather data powered by OpenWeatherMap</footer>
+    </section>
+
+    <aside class="rightbar">
+      <div class="right-date">
+        <div><span id="right-weekday">Today</span><strong id="right-day-number">24</strong></div>
+        <button class="bell" aria-label="Notifications">♧<i></i></button>
+      </div>
+
+      <section class="calendar-card">
+        <div class="calendar-head">
+          <button id="prev-month" aria-label="Previous month">‹</button>
+          <strong id="calendar-month">Calendar</strong>
+          <button id="next-month" aria-label="Next month">›</button>
+        </div>
+        <div class="calendar-week">
+          <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+        </div>
+        <div class="calendar-days" id="calendar-days"></div>
+      </section>
+
+      <section class="prediction">
+        <div class="section-heading prediction-heading">
+          <div><h2>Weather prediction</h2><p>Coming up in your city</p></div>
+          <span class="prediction-dot">●</span>
+        </div>
+        <div id="prediction-list" class="prediction-list">
+          <div class="prediction-placeholder">Forecast cards will appear here.</div>
+        </div>
+        <button class="next-days" id="scroll-forecast">▦ &nbsp; Next 5 Days <span>↗</span></button>
+      </section>
+
+      <div class="right-tip">
+        <span>✦</span>
+        <div><strong>Weather tip</strong><p id="weather-tip">Search a city to get your local forecast.</p></div>
+      </div>
+      <div class="sidebar-footer">Made for brighter days <span>☀</span></div>
+    </aside>
+  </main>
+
+  <script src="/js/dashboard.js" defer></script>
+</body>
+</html>
